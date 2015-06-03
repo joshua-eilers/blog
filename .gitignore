@@ -1,0 +1,9 @@
+Thumbs.db
+*.bak
+*.swp
+*.tmp
+Desktop.ini
+.DS_Store
+node_modules
+.sublime-grunt.cache
+npm-debug.log
