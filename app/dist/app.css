@@ -8,7 +8,7 @@
   max-width: 900px;
 }
 
-.blog .post .post-comments {
+.blog .post .post-comments-container {
   display: none;
 }
 
@@ -18,6 +18,10 @@
 
 .comments .comments-list img {
   padding-right: 10px;
+}
+
+.comments .comments-list .comment {
+  width: auto;
 }
 #overlay {
   display: none;

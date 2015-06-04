@@ -54,7 +54,7 @@ Blog.prototype.insertPosts = function(posts) {
 
   this.$el.find('.btn-read-more').click(function() {
     var $this = $(this);
-    var $comments = $this.siblings('.post-comments');
+    var $comments = $this.siblings('.post-comments-container');
     
     $this.siblings('.post-text').removeClass('trunc');
 
@@ -62,7 +62,7 @@ Blog.prototype.insertPosts = function(posts) {
       url: null,
       $target: $comments,
       id: $this.siblings('.post-id').val()
-    });
+    }).appendTo($comments);
     
     $comments.show();
 

@@ -5,3 +5,7 @@
 .comments .comments-list img {
   padding-right: 10px;
 }
+
+.comments .comments-list .comment {
+  width: auto;
+}

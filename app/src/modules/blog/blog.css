@@ -2,6 +2,6 @@
   max-width: 900px;
 }
 
-.blog .post .post-comments {
+.blog .post .post-comments-container {
   display: none;
 }

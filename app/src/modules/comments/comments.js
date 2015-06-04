@@ -5,15 +5,21 @@ var MockAjax = require('../mock_ajax/mock_ajax');
 module.exports = Comments;
 
 function Comments(opts) {
+  var html = $(fs.readFileSync(__dirname + '/comments.html', 'utf8'));
+  this.$el = $(html);
   this.url = opts.url;
   this.$target = opts.$target;
   this.postId = opts.id;
-  this.commentsTemplate = _.template(fs.readFileSync(__dirname + '/comments.html', 'utf8'));
+  this.commentTemplate = _.template(fs.readFileSync(__dirname + '/comment.html', 'utf8'));
 
   this.fetchComments(this.postId);
 
   return this;
 }
+
+Comments.prototype.appendTo = function($target) {
+  $target.append(this.$el);
+};
 
 Comments.prototype.fetchComments = function(id) {
   var self = this;
@@ -37,15 +43,20 @@ Comments.prototype.fetchComments = function(id) {
 };
 
 Comments.prototype.insertComments = function(comments) {
-  var html = this.commentsTemplate({ comments: comments });
-  this.$target.append(html);
+  var html = "";
   var self = this;
 
-  this.$target.find('.comments form').submit(function(e) {
+  $.each(comments, function(i, comment) {
+    html += self.commentTemplate({ comment: comment });
+  });
+
+  this.$el.find('.comments-list').append(html);
+
+  this.$el.find('form').submit(function(e) {
     self.postComment(
       self.postId,
-      self.$target.find('.comments form .add-comment-name').val(),
-      self.$target.find('.comments form .add-comment-text').val()
+      self.$el.find('form .add-comment-name').val(),
+      self.$el.find('form .add-comment-text').val()
     );
     return false;
   });
@@ -65,15 +76,13 @@ Comments.prototype.postComment = function(id, name, text) {
   });
 
   request.done(function(response) {
-    // self.insertComments(response);
-
-    // prepend the nwe comment above the rest here
-    // show overlay while saving the comment?
     // reset the text fields on succesfuly submission
     if (response.success) {
-      console.log('success');
-      overlay.remove();
+      var html = self.commentTemplate({ comment: { name: name, timestamp: 'June 2 2015 at 4:00 PM', text: text } });
+      self.$el.find('.comments-list').prepend(html);
     }
+
+    overlay.remove();
   });
 
   request.fail(function(response) {

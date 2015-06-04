@@ -12,13 +12,6 @@
     </form>
   </div>
   <hr>
-  <div class="comments-list">
-    <% _.each(comments, function(comment) { %>
-      <div class="comment">
-        <img class="pull-left" src="lib/images/placeholder.png">
-        <h4><%= comment.name %> <small class="pull-right"><%= comment.timestamp %></small></h4>
-        <%= comment.text %>
-      </div>
-    <% }); %>
+  <div class="comments-list" style="display: block;">
   </div>
 </div>
