@@ -1,4 +1,7 @@
 
+.blog {
+  max-width: 1000px;
+}
 #sidebar-container {
   position: fixed;
   top: 0;
