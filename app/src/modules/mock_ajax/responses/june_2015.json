@@ -9,12 +9,12 @@
         {
           "name": "This guy",
           "timestamp": "June 1 2015 at 4:00 PM",
-          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam semper mauris ac justo tempor consectetur. Morbi rhoncus iaculis ipsum id condimentum. Donec faucibus leo scelerisque scelerisque aliquet."
         },
         {
           "name": "That guy",
           "timestamp": "June 2 2015 at 4:00 PM",
-          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam semper mauris ac justo tempor consectetur. Morbi rhoncus iaculis ipsum id condimentum. Donec faucibus leo scelerisque scelerisque aliquet."
         }
       ]
     }

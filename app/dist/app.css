@@ -15,6 +15,10 @@
 .blog .post .post-comments form input {
   max-width: 300px;
 }
+
+.blog .post .post-comments .post-comments-list img {
+  padding-right: 10px;
+}
 #sidebar-container {
   position: fixed;
   top: 0;

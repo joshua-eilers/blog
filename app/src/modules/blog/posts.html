@@ -22,7 +22,9 @@
       <div class="post-comments-list">
         <% _.each(post.comments, function(comment) { %>
           <div class="comment">
-            <div></div>
+            <img class="pull-left" src="lib/images/placeholder.png">
+            <h4><%= comment.name %> <small class="pull-right"><%= comment.timestamp %></small></h4>
+            <%= comment.text %>
           </div>
         <% }); %>
       </div>
