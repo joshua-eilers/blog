@@ -1,0 +1,18 @@
+#overlay {
+  display: none;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  z-index: 10000;
+}
+
+#loaderImage {
+  bottom: 0;
+  left: 0;
+  top: 0;
+  right: 0;
+  margin: auto;
+  position: absolute;
+  width: 150px;
+  height: 150px;
+}

@@ -30,6 +30,8 @@ function MockAjax(opts) {
     }
   } else if (this.opts.data.method == 'fetchComments') {
     jsonString = fs.readFileSync(__dirname + '/responses/comments.json', 'utf8');
+  } else if (this.opts.data.method == 'postComment') {
+    jsonString = fs.readFileSync(__dirname + '/responses/post_comment.json', 'utf8');
   }
 
   this.response = JSON.parse(jsonString);
@@ -39,7 +41,7 @@ function MockAjax(opts) {
     if (self.donePromise) {
       self.donePromise(self.response);
     }
-  }, 100);
+  }, 200);
 
   return this;
 }

@@ -60,7 +60,7 @@ Blog.prototype.insertPosts = function(posts) {
 
     new Comments({
       url: null,
-      $el: $comments,
+      $target: $comments,
       id: $this.siblings('.post-id').val()
     });
     
