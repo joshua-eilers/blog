@@ -1,6 +1,7 @@
 var fs = require('fs');
 var mediator = require('../mediator/mediator');
 var MockAjax = require('../mock_ajax/mock_ajax');
+var Comments = require('../comments/comments');
 
 module.exports = Blog;
 
@@ -53,8 +54,18 @@ Blog.prototype.insertPosts = function(posts) {
 
   this.$el.find('.btn-read-more').click(function() {
     var $this = $(this);
+    var $comments = $this.siblings('.post-comments');
+    
     $this.siblings('.post-text').removeClass('trunc');
-    $this.siblings('.post-comments').show();
+
+    new Comments({
+      url: null,
+      $el: $comments,
+      id: $this.siblings('.post-id').val()
+    });
+    
+    $comments.show();
+
     $this.remove();
   });
 };

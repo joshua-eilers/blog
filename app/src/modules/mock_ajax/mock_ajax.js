@@ -28,6 +28,8 @@ function MockAjax(opts) {
     } else if (this.opts.data.date == 'January 2015') {
       jsonString = fs.readFileSync(__dirname + '/responses/january_2015.json', 'utf8');
     }
+  } else if (this.opts.data.method == 'fetchComments') {
+    jsonString = fs.readFileSync(__dirname + '/responses/comments.json', 'utf8');
   }
 
   this.response = JSON.parse(jsonString);
