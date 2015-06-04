@@ -10,7 +10,7 @@ var applicationStart = function() {
 
   // instantiate modules
   var sidebar = new Sidebar({ url: null });
-  var blog = new Blog();
+  var blog = new Blog({ url: null });
 
   // display the modules
   sidebar.appendTo('#sidebar-container');

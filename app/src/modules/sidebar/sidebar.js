@@ -52,9 +52,15 @@ Sidebar.prototype.insertOptions = function(options) {
   var self = this;
 
   $ul.find('a').click(function() {
-    var $this = $(this);
+    var $a = $(this);
+    var $parent = $a.parent();
+
+    if ($parent.hasClass('active')) {
+      return;
+    }
+
     self.$el.find('li.active').removeClass('active');
-    $this.parent().addClass('active');
-    mediator.publish('option-selected', { date: $this.text() });
+    $parent.addClass('active');
+    mediator.publish('option-selected', { date: $a.text() });
   });
 };

@@ -65,6 +65,13 @@ module.exports = function(grunt) {
         options: {
           spawn: false
         }
+      },
+      json: {
+        files: ['app/src/**/*.json'],
+        tasks: ['jshint', 'browserify', 'uglify'],
+        options: {
+          spawn: false
+        }
       }
     }
 

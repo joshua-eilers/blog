@@ -1,11 +1,14 @@
 var fs = require('fs');
 var mediator = require('../mediator/mediator');
+var MockAjax = require('../mock_ajax/mock_ajax');
 
 module.exports = Blog;
 
-function Blog() {
+function Blog(opts) {
   var html = fs.readFileSync(__dirname + '/blog.html', 'utf8');
   this.$el = $(html);
+  this.url = opts.url;
+  this.postsTemplate = _.template(fs.readFileSync(__dirname + '/posts.html', 'utf8'));
 
   var self = this;
 
@@ -19,5 +22,32 @@ Blog.prototype.appendTo = function(target) {
 };
 
 Blog.prototype.fetchBlog = function(date) {
-  console.log(date);
+  var self = this;
+
+  // use a custom mock ajax object, looks like $.ajax so easy to plugin to real library later
+  var request = new MockAjax({
+    type: 'get',
+    url: this.url,
+    data: { method: 'fetchBlog', date: date },
+    dataType: 'json'
+  });
+
+  request.done(function(response) {
+    self.setDate(response.date);
+    self.insertPosts(response.posts);
+  });
+
+  request.fail(function(response) {
+    console.log('error');
+    console.log(response);
+  });
+};
+
+Blog.prototype.setDate = function(date) {
+  this.$el.find('h1 > small').html(date);
+};
+
+Blog.prototype.insertPosts = function(posts) {
+  var html = this.postsTemplate({ posts: posts });
+  this.$el.find('.posts').html(html);
 };
