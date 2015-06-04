@@ -1,4 +1,4 @@
-.sidebar {
+#sidebar-container {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -10,7 +10,6 @@
   overflow-y: auto;
   background-color: #f5f5f5;
   border-right: 1px solid #eee;
-  color: red;
 }
 
 .sidebar ul {
@@ -18,7 +17,7 @@
 }
 
 .sidebar li {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .sidebar li a {
@@ -26,4 +25,14 @@
   display: block;
   color: #999;
   font-size: 18px;
+}
+
+.sidebar li.active a {
+  color: #333;
+  cursor: default;
+  text-decoration: none;
+}
+
+.sidebar hr {
+  border-top-color: #ccc;
 }

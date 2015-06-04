@@ -1,3 +1,11 @@
-<% _.each(elements, function(el) { %>
-  <li><a href="javascript: void(0);"><%= el %></a></li>
+<% _.each(elements, function(el, i) { %>
+  <li<%= i == 0 ? ' class="active"' : '' %>>
+    <a href="javascript: void(0);"><%= el %></a>
+  </li>
 <% }); %>
+
+<li>
+  <a href="javascript: void(0);">
+    <span class="glyphicon glyphicon glyphicon glyphicon-option-horizontal"></span>
+  </a>
+</li>

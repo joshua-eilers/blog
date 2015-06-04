@@ -14,9 +14,10 @@ function MockAjax(opts) {
   // this part is just to bring in mock data depending on the request
   if (this.opts.data.method == 'fetchOptions') {
     jsonString = fs.readFileSync(__dirname + '/sidebar_options.json', 'utf8');
-    this.response = JSON.parse(jsonString);
   }
 
+  this.response = JSON.parse(jsonString);
+  
   // set timer to run this.donePromise after some timeout, simulate a network delay
   setTimeout(function() {
     if (self.donePromise) {

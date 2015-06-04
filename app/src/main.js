@@ -1,6 +1,7 @@
 var fs = require('fs');
 var mediator = require('./modules/mediator/mediator');
 var Sidebar = require('./modules/sidebar/sidebar');
+var Blog = require('./modules/blog/blog');
 
 var applicationStart = function() {
   // setup initial page skeleton
@@ -9,9 +10,11 @@ var applicationStart = function() {
 
   // instantiate modules
   var sidebar = new Sidebar({ url: null });
+  var blog = new Blog();
 
   // display the modules
   sidebar.appendTo('#sidebar-container');
+  blog.appendTo('#blog-container');
 
   mediator.publish('page-init', {});
 };

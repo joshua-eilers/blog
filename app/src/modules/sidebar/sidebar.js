@@ -21,7 +21,6 @@ function Sidebar(opts) {
 
 Sidebar.prototype.appendTo = function(target) {
   $(target).append(this.$el);
-  this.$el.find('ul').append(this.elementsTemplate({ elements: ['A', 'B', 'C'] }));
 };
 
 Sidebar.prototype.fetchOptions = function() {
@@ -36,11 +35,26 @@ Sidebar.prototype.fetchOptions = function() {
   });
 
   request.done(function(response) {
-    console.log(response);
+    self.insertOptions(response);
+    mediator.publish('option-selected', { date: response[0] });
   });
 
   request.fail(function(response) {
     console.log('error');
     console.log(response);
+  });
+};
+
+Sidebar.prototype.insertOptions = function(options) {
+  var $ul = this.$el.find('ul');
+  $ul.append(this.elementsTemplate({ elements: options }));
+
+  var self = this;
+
+  $ul.find('a').click(function() {
+    var $this = $(this);
+    self.$el.find('li.active').removeClass('active');
+    $this.parent().addClass('active');
+    mediator.publish('option-selected', { date: $this.text() });
   });
 };
