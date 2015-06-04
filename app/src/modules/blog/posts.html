@@ -1,6 +1,32 @@
 <% _.each(posts, function(post) { %>
-  <h2 class="post-title"><%= post.title %></h2>
-  <div class="post-time"><span class="glyphicon glyphicon-time"></span><%= post.timestamp %></div>
-  <br>
-  <div class="post-text"><%= post.text %></div>
+  <div class="post">
+    <h2 class="post-title"><%= post.title %></h2>
+    <div class="post-time"><span class="glyphicon glyphicon-time"></span> <%= post.timestamp %></div>
+    <br>
+    <div class="post-text trunc"><%= post.text %></div>
+    <div class="post-comments">
+      <hr>
+      <div class="well">
+        <h4>Add a comment:</h4>
+        <form class="form">
+          <div class="form-group">
+            <input class="form-control" placeholder="Name">
+          </div>
+          <div class="form-group ">
+            <textarea class="form-control" placeholder="Comment here..." rows="3"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+        </form>
+      </div>
+      <hr>
+      <div class="post-comments-list">
+        <% _.each(post.comments, function(comment) { %>
+          <div class="comment">
+            <div></div>
+          </div>
+        <% }); %>
+      </div>
+    </div>
+    <button class="btn btn-primary btn-read-more">Read more</button>
+  </div>
 <% }); %>

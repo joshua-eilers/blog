@@ -1,3 +1,11 @@
 .blog {
-  max-width: 1000px;
+  max-width: 900px;
+}
+
+.blog .post .post-comments {
+  display: none;
+}
+
+.blog .post .post-comments form input {
+  max-width: 300px;
 }
