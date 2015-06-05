@@ -24,6 +24,8 @@ Comments.prototype.appendTo = function($target) {
 Comments.prototype.fetchComments = function(id) {
   var self = this;
 
+  overlay.display();
+
   // use a custom mock ajax object, looks like $.ajax so easy to plugin to real library later
   var request = new MockAjax({
     type: 'get',
@@ -34,11 +36,13 @@ Comments.prototype.fetchComments = function(id) {
 
   request.done(function(response) {
     self.insertComments(response);
+    overlay.remove();
   });
 
   request.fail(function(response) {
     console.log('error');
     console.log(response);
+    overlay.remove();
   });
 };
 
@@ -52,7 +56,20 @@ Comments.prototype.insertComments = function(comments) {
 
   this.$el.find('.comments-list').append(html);
 
+  this.$el.find('form .add-comment-text').keyup(function() {
+    if ($(this).val().length) {
+      self.$el.find('form .btn-primary.disabled').removeClass('disabled');
+    } else {
+      self.$el.find('form .btn-primary').addClass('disabled');
+    }
+  });
+
   this.$el.find('form').submit(function(e) {
+    var $this = $(this);
+    if (!$this.find('.add-comment-text').val().length) {
+      return false;
+    }
+
     self.postComment(
       self.postId,
       self.$el.find('form .add-comment-name').val(),
@@ -76,8 +93,9 @@ Comments.prototype.postComment = function(id, name, text) {
   });
 
   request.done(function(response) {
-    // reset the text fields on succesfuly submission
     if (response.success) {
+      self.$el.find('.add-comment-text,.add-comment-name').val('');
+      self.$el.find('.form .btn-primary').addClass('disabled');
       var html = self.commentTemplate({ comment: { name: name, timestamp: 'June 2 2015 at 4:00 PM', text: text } });
       self.$el.find('.comments-list').prepend(html);
     }

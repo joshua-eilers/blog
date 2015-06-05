@@ -1,5 +1,6 @@
 var fs = require('fs');
 var mediator = require('../mediator/mediator');
+var overlay = require('../overlay/overlay');
 var MockAjax = require('../mock_ajax/mock_ajax');
 var Comments = require('../comments/comments');
 
@@ -25,6 +26,8 @@ Blog.prototype.appendTo = function(target) {
 Blog.prototype.fetchBlog = function(date) {
   var self = this;
 
+  overlay.display();
+
   // use a custom mock ajax object, looks like $.ajax so easy to plugin to real library later
   var request = new MockAjax({
     type: 'get',
@@ -36,11 +39,13 @@ Blog.prototype.fetchBlog = function(date) {
   request.done(function(response) {
     self.setDate(response.date);
     self.insertPosts(response.posts);
+    overlay.remove();
   });
 
   request.fail(function(response) {
     console.log('error');
     console.log(response);
+    overlay.remove();
   });
 };
 
