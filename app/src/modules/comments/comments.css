@@ -6,6 +6,7 @@
   padding-right: 10px;
 }
 
-.comments .comments-list .comment {
-  width: auto;
+.comments .comments-list .comment .comment-text {
+  overflow: hidden;
+  display: block;
 }
