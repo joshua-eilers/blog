@@ -96,7 +96,15 @@ Comments.prototype.postComment = function(id, name, text) {
     if (response.success) {
       self.$el.find('.add-comment-text,.add-comment-name').val('');
       self.$el.find('.form .btn-primary').addClass('disabled');
-      var html = self.commentTemplate({ comment: { name: name, timestamp: 'June 2 2015 at 4:00 PM', text: text } });
+
+      var html = self.commentTemplate({
+        comment: {
+          name: _.escape(name),
+          timestamp: new Date().toLocaleTimeString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
+          text: _.escape(text)
+        }
+      });
+
       self.$el.find('.comments-list').prepend(html);
     }
 
